@@ -1,0 +1,119 @@
+[
+    {
+        "id": 1,
+        "name": "Mouse Gamer Redragon Cobra, Chroma, Preto",
+        "image": "/products-image/Mouse_Gamer_Redragon_1.jpg",
+        "stock": 5,
+        "price": 141.06,
+        "new": true,
+        "category": "mouse"
+    },
+    {
+        "id": 2,
+        "name": "Placa de Vídeo Gigabyte Radeon RX 6700 XT GAMING OC 12G, 12GB GDDR6, RGB",
+        "image": "/products-image/RX_6700_XT_1.jpg",
+        "stock": 3,
+        "price": 5899.90,
+        "new": false,
+        "category": "video-card"
+    },
+    {
+        "id": 3,
+        "name": "Placa de Vídeo ZOTAC GAMING GeForce RTX 3060",
+        "image": "/products-image/RTX_3060_1.jpg",
+        "stock": 7,
+        "price": 5399.90,
+        "new": false,
+        "category": "video-card"
+    },
+    {
+        "id": 4,
+        "name": "Placa de Vídeo PNY NVIDIA Quadro RTX 4000 8GB",
+        "image": "/products-image/Quadro_RTX_1.jpg",
+        "stock": 2,
+        "price": 7305.78,
+        "new": false,
+        "category": "video-card"
+    },
+    {
+        "id": 5,
+        "name": "Teclado Gamer Corsair K55, RGB",
+        "image": "/products-image/Corsair_K55.jpg",
+        "stock": 13,
+        "price": 270.50,
+        "new": false,
+        "category": "keyboard"
+    },
+    {
+        "id": 6,
+        "name": "Teclado Mecânico Gamer Corsair K70 RGB",
+        "image": "/products-image/Corsair_K70_1.jpg",
+        "stock": 11,
+        "price": 749.90,
+        "new": true,
+        "category": "keyboard"
+    },
+    {
+        "id": 7,
+        "name": "Teclado Semi Mecânico Gamer GFallen Eco, RGB",
+        "image": "/products-image/GFallen_Eco.jpg",
+        "stock": 7,
+        "price": 199.00,
+        "new": true,
+        "category": "keyboard"
+    },
+    {
+        "id": 8,
+        "name": "Mouse Gamer Logitech G403 Hero 16k, RGB",
+        "image": "/products-image/Logitech_G403_1.jpg",
+        "stock": 21,
+        "price": 246.90,
+        "new": false,
+        "category": "mouse"
+    },
+    {
+        "id": 9,
+        "name": "Headset Gamer HyperX Cloud Stinger",
+        "image": "/products-image/HyperX_Cloud_Stinger_1.jpg",
+        "stock": 17,
+        "price": 279.90,
+        "new": true,
+        "category": "headset"
+    },
+    {
+        "id": 10,
+        "name": "Headset Gamer HyperX Cloud Alpha",
+        "image": "/products-image/HyperX_Cloud_Alpha.jpg",
+        "stock": 8,
+        "price": 599.90,
+        "new": false,
+        "category": "headset"
+    },
+    {
+        "id": 11,
+        "name": "Mousepad Gamer HyperX Fury S, Extra Grande",
+        "image": "/products-image/Mousepad_HyperX_Fury_Grande_1.jpg",
+        "stock": 15,
+        "price": 189.90,
+        "new": false,
+        "category": "mousepad"
+    },
+    {
+        "id": 12,
+        "name": "Mousepad Gamer Havit MP838, Pequeno",
+        "image": "/products-image/Havit_MP838.jpg",
+        "stock": 14,
+        "price": 8.90,
+        "new": true,
+        "category": "mousepad"
+    },
+    {
+        "id": 13,
+        "name": "SSD Kingston A400, 480GB, SATA",
+        "image": "/products-image/SSD_A400.jpg",
+        "stock": 18,
+        "price": 369.90,
+        "new": false,
+        "category": "ssd"
+    }
+]

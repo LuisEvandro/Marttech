@@ -1,0 +1,56 @@
+.containerProductCard{
+    margin: 10px;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0px 1px 5px var(--gray-200);
+}
+.containerProductCard .productDetails{
+    padding: 10px;
+    background-color: var(--gray-50);
+}
+.containerProductCard .image{
+    text-align: center;
+}
+.containerProductCard .title{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 40px;
+    color: var(--gray-800);
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    font-size: 0.9rem; 
+}
+.containerProductCard .price{
+    margin: 0px;
+    margin-bottom: 15px;
+    color: var(--orange);
+    font-size: 1rem;
+    text-shadow: 0px 0.5px 1.7px var(--orange);
+}
+.containerProductCard .price span{
+    color: var(--green);
+    text-shadow: 0px 0.5px 1.7px var(--green);
+}
+.containerProductCard .price span strong{
+    font-size: 1.5rem;
+}
+.containerProductCard .buttonAddToCart{
+    cursor: pointer;
+    background-color: var(--green);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+.containerProductCard .buttonAddToCart div{
+    color: var(--white);
+    text-transform: uppercase;
+    height: 30px;
+    font-size: 1.1rem;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containerProductCard .buttonAddToCart span{
+    margin-left: 5px;
+    font-size: 1rem;
+}
