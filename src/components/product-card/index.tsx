@@ -1,5 +1,7 @@
 import styles from './styles.module.css'
 import Image from "next/image";
+import { useContext } from 'react';
+import { CartContext } from '../../contexts/cartContext';
 
 interface Product {
     product: {
@@ -14,7 +16,7 @@ interface Product {
 }
 
 export function ProductCard({product}: Product) {
-
+    const { cartData, addItemToCart } = useContext(CartContext);
     return (
         <div className={styles.containerProductCard} >
             <div className={styles.image}>
@@ -33,7 +35,7 @@ export function ProductCard({product}: Product) {
                     12x de {((product.price / 12)).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})} sem juros 
                 </p>
             </div>
-            <div className={styles.buttonAddToCart}>
+            <div className={styles.buttonAddToCart} onClick={() => addItemToCart(product)}>
                 <div>
                     Comprar <span className={"material-icons"}>add_shopping_cart</span>
                 </div>

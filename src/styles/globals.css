@@ -12,6 +12,10 @@
   --gray-800: #494D4B;
 }
 
+html{
+  overflow-y: scroll;
+}
+
 html,
 body {
   font-family: 'Roboto', sans-serif;

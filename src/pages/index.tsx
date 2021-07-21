@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { ProductCard } from "../components/product-card";
 
-import styles from '../styles/pages/home.module.css'
+import styles from '../styles/home.module.css'
 import products from "../../products-data.json";
 
 interface Product {
@@ -19,14 +19,14 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Home | Marttech Ecommerce</title>
+        <title>Home | Marttech Store</title>
       </Head>
-
+      
       <div className={styles.containerCatalog}>
         {
           products.map((item: Product, index) => {
             return (
-              <ProductCard product={item} key={index}/>
+              <ProductCard product={item} key={index} />
             )
           })
         }

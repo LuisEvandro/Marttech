@@ -61,9 +61,9 @@ export function Header() {
                 
                 <div className={styles.menuItems}>
                     {
-                        menuData.map((item: Menu) => {
+                        menuData.map((item: Menu, index) => {
                             return (
-                                <Link href={item.reference}>
+                                <Link href={item.reference} key={index}>
                                     <a><span className={"material-icons"}>{item.icon}</span> {item.name}</a>
                                 </Link>
                             )
@@ -77,9 +77,9 @@ export function Header() {
             </header>
             <div className={styles.menuMobile+' '+(isOpen && styles.open)}>
                 {
-                    menuData.map((item: Menu) => {
+                    menuData.map((item: Menu, index) => {
                         return (
-                            <div>
+                            <div key={index}>
                                 <Link href={item.reference}>
                                     <a><span className={"material-icons"}>{item.icon}</span> {item.name}</a>
                                 </Link>
