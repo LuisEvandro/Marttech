@@ -11,7 +11,8 @@ interface Product {
         stock: number,
         price: number,
         new: boolean,
-        category: string
+        category: string,
+        quantityCart?: number
     }
 }
 

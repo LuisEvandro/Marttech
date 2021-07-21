@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 interface Product {
     id: number,
@@ -7,7 +8,8 @@ interface Product {
     stock: number,
     price: number,
     new: boolean,
-    category: string
+    category: string,
+    quantityCart?: number
 }
 
 interface Cart {
@@ -17,7 +19,7 @@ interface Cart {
 
 interface CartContextInterface{
     cartData: Cart,
-    addItemToCart: (product: Product) => void
+    addItemToCart: (product: Product) => boolean
 }
 
 interface CartProviderProps {
@@ -31,11 +33,41 @@ export function CartProvider({ children }:CartProviderProps){
     const [ cartData, setCartData ] = useState<Cart>({Products: [], QuantityTotal: 0})
 
     function addItemToCart(product: Product){
-        console.log(product);
+        try {
+            let newCart = cartData;
+            let countQty = product.quantityCart;
+
+            product.quantityCart = countQty ? (countQty++) : 1;
+            newCart.Products.push(product);
+            newCart.QuantityTotal = newCart.Products.length;
+
+            setCartData(newCart)
+            sessionStorage.setItem('cart', JSON.stringify(newCart));
+            
+            toast.success(`${product.name}, adicionado ao carrinho!`, {
+                autoClose: 5000,
+                position: toast.POSITION.TOP_RIGHT
+            });
+
+            return true
+        } catch (error) {
+            console.log(error);
+            toast.error(error, {
+                autoClose: 5000,
+                position: toast.POSITION.TOP_RIGHT
+            });
+            return false
+        }
+
     }
 
 	useEffect(() => {
-		
+        const cartRecovered = sessionStorage.getItem('cart');
+
+        if(cartRecovered)
+            setCartData(JSON.parse(cartRecovered))
+
+
 	}, []);
 
 	return(
