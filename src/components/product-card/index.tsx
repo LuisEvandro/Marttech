@@ -41,11 +41,3 @@ export function ProductCard({product}: Product) {
         </div>
     );
 }
-
-
-{/* <Image
-    width={'auto'}
-    height={150}
-    src={image}
-    objectFit="cover"
-/> */}

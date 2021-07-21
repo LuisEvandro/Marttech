@@ -1,6 +1,6 @@
 .loader {
     border: 7px solid var(--gray-200);
-    border-top: 7px solid var(--purple-800);
+    border-top: 7px solid var(--blue);
     border-radius: 50%;
     width: 65px;
     height: 65px;
