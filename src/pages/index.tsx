@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { ProductCard } from "../components/product-card";
-
 import styles from '../styles/home.module.css'
 import products from "../../products-data.json";
 
@@ -16,7 +15,6 @@ interface Product {
 }
 
 export default function Home() {
-
   return (
     <>
       <Head>

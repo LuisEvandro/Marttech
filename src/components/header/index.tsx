@@ -22,25 +22,24 @@ export function Header() {
             auth: false
         },
         {
-            name: 'Cart',
+            name: 'Carrinho',
             icon: 'shopping_cart',
             reference: '/cart',
             auth: false
         },
         {
-            name: 'Orders',
+            name: 'Pedidos',
             icon: 'request_quote',
             reference: '/authentication/orders',
             auth: true
         },
         {
-            name: 'Login/Register',
+            name: 'Login/Registro',
             icon: 'account_circle',
             reference: '/authentication/login',
             auth: false
         }
     ]
-
 
     return (
         <>

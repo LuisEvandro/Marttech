@@ -1,7 +1,7 @@
 import styles from './styles.module.css'
 import Image from "next/image";
-import { useContext } from 'react';
 import { CartContext } from '../../contexts/cartContext';
+import { useContext } from 'react';
 
 interface Product {
     product: {
@@ -17,7 +17,7 @@ interface Product {
 }
 
 export function ProductCard({product}: Product) {
-    const { cartData, addItemToCart } = useContext(CartContext);
+    const { addItemToCart } = useContext(CartContext);
     return (
         <div className={styles.containerProductCard} >
             <div className={styles.image}>

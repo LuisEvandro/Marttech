@@ -1,0 +1,74 @@
+.containerCartCard{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 15px 0;
+    padding: 5px 10px;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0px 1px 5px var(--gray-200);
+}
+.descriptionContent{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.descriptionContent .imageContent{
+    margin-right: 20px;
+}
+.nameAndPrice p{
+    margin: 10px 0;
+}
+.nameAndPrice p:first-of-type{
+    color: var(--gray-800);
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    font-size: 0.9rem; 
+}
+.nameAndPrice p:last-of-type{
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    color: var(--orange);
+    font-size: 1rem;
+    text-shadow: 0px 0.5px 1.7px var(--orange);
+}
+
+/* minusOrPlus */
+.countContent .minusOrPlus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.countContent .minusOrPlus span{
+    cursor: pointer;
+    width:25px;
+    height:25px;
+    margin: 0;
+    border-radius:5px;
+    align-items: center;
+    text-align: center;
+}
+.countContent .minusOrPlus input,
+.countContent .minusOrPlus input:active,
+.countContent .minusOrPlus input:focus,
+.countContent .minusOrPlus input:focus-visible{
+    background: none;
+    border: none;
+    text-align: center;
+    outline: none;
+}
+.countContent .minusOrPlus input{
+    color: var(--gray-800);
+    height: 25px;
+    width: 55px;
+    font-weight: bold;
+}
+.countContent .minusOrPlus span:first-of-type {
+    background-color: var(--red);
+    color: var(--white);
+}
+.countContent .minusOrPlus span:last-of-type {
+    background-color: var(--green);
+    color: var(--white);
+}

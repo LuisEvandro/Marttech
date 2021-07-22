@@ -2,6 +2,7 @@
   --white: #FFF;
   --red: #e83f5b;
   --green: #4cd63b;
+  --green-2: #41a534;
   --orange: #ff9208;
   --blue: #074f8c;
 
@@ -35,6 +36,10 @@ body {
 	html{
 		font-size: 87.5%;
 	}
+}
+
+main{
+  padding-top: 90px;
 }
 
 * {
