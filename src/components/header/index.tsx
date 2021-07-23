@@ -91,14 +91,34 @@ export function Header() {
             <div className={styles.menuMobile+' '+(isOpen && styles.open)}>
                 {
                     menuData.map((item: Menu, index) => {
-                        return (
-                            <div key={index}>
-                                <Link href={item.reference}>
-                                    <a><span className={"material-icons"}>{item.icon}</span> {item.name}</a>
-                                </Link>
-                            </div>
-                        )
+                        if(isAuthenticated && item.name == 'Login'){
+                            return (
+                                <div key={index}>
+                                    <Link href={''}>
+                                        <a title={userState.name} style={{cursor:"default"}}><span className={"material-icons"}>{item.icon}</span> {(userState.name).substring(0, 20)}{(userState.name).length > 20 && "..."}</a>
+                                    </Link>
+                                </div>
+                            )
+                        }else{
+                            return (
+                                <div key={index}>
+                                    <Link href={item.reference}>
+                                        <a><span className={"material-icons"}>{item.icon}</span> {item.name}</a>
+                                    </Link>
+                                </div>
+                            )
+                        }
                     })
+                }
+
+                {
+                    isAuthenticated && (
+                        <div>
+                            <span style={{marginLeft: "15px", cursor:"pointer"}} onClick={() => logout()}>
+                                <a><span className={"material-icons"}>logout</span> Sair</a>
+                            </span>
+                        </div>
+                    ) 
                 }
             </div>
         </>

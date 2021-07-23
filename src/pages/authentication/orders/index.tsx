@@ -65,13 +65,17 @@ export default function Orders() {
                                         </AccordionSummary>
                                         <AccordionDetails>
                                             <div className={styles.contentOrder}>
+                                                <p>Em nome de: <span>{userState.name}</span></p>
+                                                <p>CPF: <span>{userState.cpf}</span></p>
+                                                <p>E-mail: <span>{userState.email}</span></p>
+
                                                 <p>Valor do pedido: <span>{order.total}</span></p>
                                                 <p>Criado em: <span>{order.date}</span></p>
 
                                                 {
                                                     order.products.map((prod: Product, prodIndex: number) => {
                                                         return(
-                                                            <OrderCard product={prod} />
+                                                            <OrderCard product={prod} key={prodIndex}/>
                                                         )
                                                     })
                                                 }
