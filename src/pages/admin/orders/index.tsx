@@ -1,14 +1,15 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../../contexts/cartContext';
+import { useEffect, useState } from 'react';
 import { OrderCard } from '../../../components/order-card';
+import TextField from '@material-ui/core/TextField';
 
 import styles from '../orders/styles.module.css'
 
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+import { IconButton } from '@material-ui/core';
+import { cpfMask } from "../../../utils";
 
 interface Product {
     id: number,
@@ -51,6 +52,8 @@ export default function AdminOrders() {
 
     const [ usersData, setUsersData ] = useState<User[]>()
     const [ usersDataFiltred, setUsersDataFiltred ] = useState<User[]>()
+    const [ strSearchCpf, setStrSearchCpf ] = useState<string>('')
+    const [ strSearchName, setStrSearchName ] = useState<string>('')
 
     useEffect(() => {
         const allUsers = JSON.parse(sessionStorage.getItem('users'))
@@ -58,7 +61,30 @@ export default function AdminOrders() {
         setUsersDataFiltred(allUsers)
     }, [])
 
-    
+    const handleEnterKeyName = (event: any) => {
+		if(event.key === 'Enter'){
+            searchName(strSearchName);
+        }
+	};
+
+    const handleEnterKeyCpf = (event: any) => {
+		if(event.key === 'Enter'){
+            searchCpf(strSearchCpf);
+        }
+	};
+
+    function searchName(string: string){
+
+        let filter = usersData.filter(f => (f.name).includes(strSearchName))
+        setUsersDataFiltred(filter)
+
+    }
+
+    function searchCpf(string: string){
+
+        let filter = usersData.filter(f => (f.cpf).includes(strSearchCpf))
+        setUsersDataFiltred(filter)
+    }
 
     return (
         <>
@@ -73,7 +99,62 @@ export default function AdminOrders() {
                     </div>
 
                     <div className={styles.filters}>
+                        <div className={styles.inputs}>
+                            <TextField
+                                id="searchCpf"
+                                label="Pesquisar CPF"
+                                type="text"
+                                variant="outlined"
+                                InputProps={{
+                                    endAdornment: 	<IconButton
+                                                        aria-label="Pesquisar"
+                                                        onClick={(e) => searchCpf(strSearchCpf)}
+                                                        edge="end"
+                                                    >
+                                                        <span className="material-icons">search</span>
+                                                    </IconButton>,
+                                }}
+                                className={styles.inputStyles}
+                                value={strSearchCpf}
+                                onKeyPress={(e) => handleEnterKeyCpf(e)}
+                                onChange={(e) => {
+                                    if((e.target.value).length < 15 ){
+                                        setStrSearchCpf(cpfMask(e.target.value))
+                                    }
+                                }}
+                            />
+                        </div>
 
+                        <div className={styles.inputs}>
+                            <TextField
+                                id="searchName"
+                                label="Pesquisar por nome"
+                                type="text"
+                                variant="outlined"
+                                InputProps={{
+                                    endAdornment: 	<IconButton
+                                                        aria-label="Pesquisar por nome"
+                                                        onClick={(e) => searchName(strSearchName)}
+                                                        edge="end"
+                                                    >
+                                                        <span className="material-icons">search</span>
+                                                    </IconButton>,
+                                }}
+                                className={styles.inputStyles}
+                                value={strSearchName}
+                                onKeyPress={(e) => handleEnterKeyName(e)}
+                                onChange={(e) => setStrSearchName(e.target.value)}
+                            />
+                        </div>
+
+                        <div className={styles.inputs}>
+                            <div 
+                                className={styles.buttonStyles}
+                                onClick={() => setUsersDataFiltred(usersData)}
+                            >
+                                Mostrar todos
+                            </div>
+                        </div>
                     </div>
                     {
                         usersDataFiltred?.map((user: User, userIndex: number) => {

@@ -29,12 +29,6 @@ interface Order{
 }
 export default function Orders() {
     const { isAuthenticated, userState } = useContext(AuthContext)
-    const router = useRouter()
-
-    
-    useEffect(() => {
-        console.log(userState)
-    }, [userState])
 
     return (
         <>

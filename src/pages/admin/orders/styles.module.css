@@ -30,25 +30,6 @@
     letter-spacing: 0.05rem;
     font-size: 1.3rem;
 }
-.filters{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-
-@media (max-width: 1080px) {
-    .filters{
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
-}
-
-@media (max-width: 720px) {
-    .filters{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-    }
-}
 
 .containerAdminOrders .ordersEmpty{
     display: flex;
@@ -66,4 +47,51 @@
     font-size: 50px;
     color: var(--blue);
     margin-right: 15px;
+}
+
+.filters{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+}
+.filters .inputs{
+    margin-right: 15px;
+}
+.filters .inputs:last-of-type{
+    margin-right: 0;
+}
+.filters .inputs .inputStyles{
+    width: 100%;
+    max-width: 350px;
+}
+.filters .buttonStyles{
+
+    color: var(--white);
+    background-color: var(--blue);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    max-width: 350px;
+    border: none;
+
+    transition: filter .3s ease-in;
+}
+.filters .buttonStyles:hover{
+    filter: brightness(1.2)
+}
+
+@media (max-width: 1080px) {
+    .filters{
+        display: block;
+    }
+    .filters .inputs{
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
 }
