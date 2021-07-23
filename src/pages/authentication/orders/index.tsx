@@ -81,6 +81,14 @@ export default function Orders() {
                                 )
                             })
                         }
+                        {
+                            userState.orders.length <= 0 && (
+                                <div className={styles.ordersEmpty}>
+                                    <span className={"material-icons"}>production_quantity_limits</span>
+                                    <h1>Sem pedidos</h1>
+                                </div>
+                            )
+                        }
                     </div>
                 ) : (
                     <LoginComponent />
