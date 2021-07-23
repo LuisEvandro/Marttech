@@ -3,10 +3,12 @@ import { Header } from '../components/header'
 import '../styles/globals.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { AuthProvider } from '../contexts/authContext';
 
 function MyApp({ Component, pageProps }) {
 
   return (
+    <AuthProvider>
       <CartProvider>
         <div>
             <ToastContainer />
@@ -18,6 +20,7 @@ function MyApp({ Component, pageProps }) {
             </main>
         </div>
       </CartProvider>
+    </AuthProvider>
   )
 }
 

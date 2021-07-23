@@ -19,6 +19,10 @@ interface Product {
 export default function Cart() {
     const { products, valueTotal} = useContext(CartContext)
 
+    function buyCart(){
+        console.log(valueTotal)
+    }
+
     return (
         <>
             <Head>
@@ -42,7 +46,7 @@ export default function Cart() {
             <div className={styles.checkoutContainer}>
                 <p>Total compra</p>
                 <p>{valueTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</p>
-                <span>
+                <span onClick={ () => buyCart}>
                     COMPRAR
                 </span>
             </div>

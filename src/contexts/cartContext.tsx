@@ -67,7 +67,7 @@ export function CartProvider({ children }:CartProviderProps){
             }
 
             toast.success(`${product.name}, adicionado ao carrinho!`, {
-                autoClose: 5000,
+                autoClose: 4000,
                 position: toast.POSITION.BOTTOM_RIGHT
             });
             countTotalCart()
@@ -75,7 +75,7 @@ export function CartProvider({ children }:CartProviderProps){
         } catch (error) {
             console.log(error);
             toast.error(error, {
-                autoClose: 5000,
+                autoClose: 4000,
                 position: toast.POSITION.BOTTOM_RIGHT
             });
             return false
@@ -89,13 +89,13 @@ export function CartProvider({ children }:CartProviderProps){
 
             countTotalCart()
             toast.success(`Produto removido do carrinho com sucesso!`, {
-                autoClose: 5000,
+                autoClose: 4000,
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         } catch (error) {
             console.log(error);
             toast.error(error, {
-                autoClose: 5000,
+                autoClose: 4000,
                 position: toast.POSITION.BOTTOM_RIGHT
             });
         }
