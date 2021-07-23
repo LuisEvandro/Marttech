@@ -18,7 +18,8 @@ interface CartContextInterface{
     addItemToCart: (product: Product) => boolean,
     removeItemCart: (id: number) => void,
     sumItemCart: (id: number) => number,
-    minItemCart: (id: number) => number
+    minItemCart: (id: number) => number,
+    cleanCart: () => void
 }
 
 interface CartProviderProps {
@@ -35,13 +36,15 @@ export function CartProvider({ children }:CartProviderProps){
     useEffect(() => {
         const cartRecovered = sessionStorage.getItem('cart')
 
-        if(cartRecovered)
+        if(cartRecovered){
             setProducts(JSON.parse(cartRecovered))
+        }
 
 	}, []);
 
     useEffect(() => {
         sessionStorage.setItem('cart', JSON.stringify(products))
+        countTotalCart()
     }, [products])
 
     function countTotalCart(){
@@ -87,7 +90,7 @@ export function CartProvider({ children }:CartProviderProps){
         try {
             saveCartData(products.filter(f => f.id != id))
 
-            countTotalCart()
+            
             toast.success(`Produto removido do carrinho com sucesso!`, {
                 autoClose: 4000,
                 position: toast.POSITION.BOTTOM_RIGHT
@@ -133,6 +136,12 @@ export function CartProvider({ children }:CartProviderProps){
         sessionStorage.setItem('cart', JSON.stringify(data))
     }
 
+    function cleanCart(){
+        setProducts([])
+        setValueTotal(0)
+        sessionStorage.setItem("cart", "[]")
+    }
+
 	return(
 		<CartContext.Provider 
             value={{
@@ -141,7 +150,8 @@ export function CartProvider({ children }:CartProviderProps){
                 addItemToCart,
                 removeItemCart,
                 sumItemCart,
-                minItemCart
+                minItemCart,
+                cleanCart
             }}
         >
 			{children}

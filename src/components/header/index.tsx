@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from "../../contexts/authContext";
 
 import styles from './styles.module.css'
 import Image from "next/image"
@@ -7,39 +8,34 @@ import Link from 'next/link'
 interface Menu {
     name: string,
     icon: string,
-    reference: string,
-    auth: boolean
+    reference: string
 }
 
 export function Header() {
+    const { isAuthenticated, userState, logout } = useContext(AuthContext);
     const [ isOpen, setIsOpen ] = useState(false);
-
-    const menuData = [
+    const [ menuData, setMenuData ] = useState<Menu[]>([
         {
             name: 'Home',
             icon: 'home',
             reference: '/',
-            auth: false
         },
         {
             name: 'Carrinho',
             icon: 'shopping_cart',
             reference: '/cart',
-            auth: false
         },
         {
             name: 'Pedidos',
             icon: 'request_quote',
             reference: '/authentication/orders',
-            auth: true
         },
         {
-            name: 'Login/Registro',
+            name: 'Login',
             icon: 'account_circle',
             reference: '/authentication/login',
-            auth: false
         }
-    ]
+    ])
 
     return (
         <>
@@ -61,13 +57,31 @@ export function Header() {
                 <div className={styles.menuItems}>
                     {
                         menuData.map((item: Menu, index) => {
-                            return (
-                                <Link href={item.reference} key={index}>
-                                    <a><span className={"material-icons"}>{item.icon}</span> {item.name}</a>
-                                </Link>
-                            )
+
+                            if(isAuthenticated && item.name == 'Login'){
+                                return (
+                                    <Link href={''} key={index}>
+                                        <a title={userState.name} style={{cursor:"default"}}><span className={"material-icons"}>{item.icon}</span> {(userState.name).substring(0, 20)}{(userState.name).length > 20 && "..."}</a>
+                                    </Link>
+                                )
+                            }else{
+                                return (
+                                    <Link href={item.reference} key={index}>
+                                        <a><span className={"material-icons"}>{item.icon}</span> {item.name}</a>
+                                    </Link>
+                                )
+                            }
                         })
                     }
+
+                    {
+                        isAuthenticated && (
+                            <span style={{marginLeft: "15px", cursor:"pointer"}} onClick={() => logout()}>
+                                <a><span className={"material-icons"}>logout</span> Sair</a>
+                            </span>
+                        ) 
+                    }
+
                 </div>
                 
                 <div className={styles.menuItemsMobile}>

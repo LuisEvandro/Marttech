@@ -15,6 +15,7 @@ export function CartCard({product}) {
         if(isMin){
             minItemCart(id);
         }else{
+            minItemCart(id)
             removeItemCart(id);
         }
     }

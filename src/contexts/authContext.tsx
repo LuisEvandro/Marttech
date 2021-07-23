@@ -1,6 +1,5 @@
-import { redirect } from 'next/dist/next-server/server/api-utils';
 import { useRouter } from 'next/router'
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 interface Product {
@@ -16,29 +15,39 @@ interface Product {
 
 interface Address{
     street: string,
-    number: number,
+    number: string,
+    district: string,
     city: string,
     state: string,
     postal_code: string
 }
 
+interface Order{
+    name: string,
+    guid: string,
+    total: string,
+    date: string,
+    products: Product[]
+}
+
 interface User{
     name: string,
     email: string,
+    cpf: string,
     password: string,
     address: Address,
     guid: string,
-    orders?: Product[]
+    orders?: Order[]
 }
 
 interface AuthContextInterface{
     userState: User,
     isAuthenticated: boolean,
     tokenState: string,
-    login: (paramEmail: string, paramPass: string) => void,
+    login: (paramEmail: string, paramPass: string, page?: string) => void,
     recoverPassword: (paramEmail: string, paramPass: string) => void,
-    createUser: (paramUser: User) => void,
-    createOrder: (paramOrder: Product[]) => void,
+    createUser: (paramUser: User, page?: string) => void,
+    createOrder: (paramOrder: Order) => void,
     logout: () => void,
 }
 
@@ -58,7 +67,9 @@ export function AuthProvider({ children }:AuthProviderProps){
         let sessionToken = sessionStorage.getItem('token')
 
         if(sessionToken){
-            setUser(getUser(sessionToken))
+            let userResult = getUser(sessionToken)
+            sessionStorage.setItem('user', JSON.stringify(userResult))
+            setUser(userResult)
             setToken(sessionToken)
             setIsAuthenticated(true)
         }
@@ -70,7 +81,7 @@ export function AuthProvider({ children }:AuthProviderProps){
                 return false
             }else{
                 let sessionUsers = JSON.parse(sessionStorage.getItem('users'));
-                let result = sessionUsers.find(f => f.guid == paramToken);
+                let result = sessionUsers?.find(f => f.guid == paramToken);
                 return result ? result : false;
             }
         } catch (error) {
@@ -83,7 +94,7 @@ export function AuthProvider({ children }:AuthProviderProps){
         }
     }
 
-    function login(paramEmail: string, paramPass: string){
+    function login(paramEmail: string, paramPass: string, page?: string){
         if(!paramEmail || !paramPass){
             toast.error('Erro ao tentar logar, tente novamente !', {
                 autoClose: 4000,
@@ -92,18 +103,26 @@ export function AuthProvider({ children }:AuthProviderProps){
             return false
         }else{
             let sessionUsers = JSON.parse(sessionStorage.getItem('users'));
-            let result = sessionUsers.find(f => f.email == paramEmail);
+            let result = sessionUsers?.find(f => f.email == paramEmail);
 
             if(result){
                 if(result.password === paramPass){
                     setUser(result)
+                    sessionStorage.setItem('user', result)
                     setToken(result.guid)
+                    sessionStorage.setItem('token', result.guid)
                     setIsAuthenticated(true)
 
                     toast.success('Login realizado com sucesso !', {
                         autoClose: 4000,
                         position: toast.POSITION.BOTTOM_RIGHT
                     });
+
+                    if(page == '/authentication/login'){
+                        router.push('/')
+                    }else{
+                        router.reload()
+                    }
 
                     return true
                 }else{
@@ -123,7 +142,7 @@ export function AuthProvider({ children }:AuthProviderProps){
         }
     }    
 
-    function createUser(paramUser: User){
+    function createUser(paramUser: User, page?: string){
         try {
             if(!paramUser){
                 toast.error('Problema ao tentar cadastrar usuário !', {
@@ -133,7 +152,7 @@ export function AuthProvider({ children }:AuthProviderProps){
                 return false
             }else{
                 let sessionUsers = JSON.parse(sessionStorage.getItem('users'))
-                let isExist = sessionUsers.find(f => f.email == paramUser.email);
+                let isExist = sessionUsers?.find(f => f.email == paramUser.email);
 
                 if(isExist){
                     toast.error(`${paramUser.email}, já está cadastrado !`, {
@@ -142,14 +161,22 @@ export function AuthProvider({ children }:AuthProviderProps){
                     });
                     return false
                 }else{
+                    if(sessionUsers == null)
+                        sessionUsers = []
+
                     sessionUsers.push(paramUser)
                     sessionStorage.setItem('users', JSON.stringify(sessionUsers))
                     setUser(paramUser)
-                    sessionStorage.setItem('token', sessionUsers.guid)
+                    sessionStorage.setItem('user', JSON.stringify(paramUser))
+                    sessionStorage.setItem('token', paramUser.guid)
                     setToken(paramUser.guid)
                     setIsAuthenticated(true)
 
-                    router.reload();
+                    if(page == '/authentication/register'){
+                        router.push('/')
+                    }else{
+                        router.reload()
+                    }
 
                     return true
                 }
@@ -209,17 +236,21 @@ export function AuthProvider({ children }:AuthProviderProps){
         }
     }
 
-    function createOrder(paramOrder: Product[]){
+    function createOrder(paramOrder: Order){
         try {
             if(!paramOrder){
-
+                toast.error('Erro ao tentar criar pedido !', {
+                    autoClose: 4000,
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+                return false
             }else{
                 let sessionUsers = JSON.parse(sessionStorage.getItem('users'));
                 let status = false;
                 sessionUsers.map((user: User) => {
                     if(user.guid == tokenState){
                         status = true
-                        user.orders = paramOrder
+                        user.orders.push(paramOrder)
 
                         setUser(user);
                     }
@@ -255,6 +286,8 @@ export function AuthProvider({ children }:AuthProviderProps){
         setUser(null)
         setToken('')
         setIsAuthenticated(false)
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('user')
 
         toast.success('Logout realizado com sucesso !', {
             autoClose: 4000,

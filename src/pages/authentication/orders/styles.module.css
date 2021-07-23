@@ -1,0 +1,32 @@
+.containerOrders .headerOrders{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+.containerOrders p{
+    color: var(--gray-800);
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    font-size: 1.1rem; 
+}
+.containerOrders .titleOrder div{
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    font-size: 1rem; 
+}
+.containerOrders p span{
+    color: var(--orange);
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    font-size: 1.3rem;
+}
