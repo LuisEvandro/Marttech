@@ -101,7 +101,7 @@ export function Header() {
                             )
                         }else{
                             return (
-                                <div key={index}>
+                                <div onClick={() => setIsOpen(!isOpen)} key={index}>
                                     <Link href={item.reference}>
                                         <a><span className={"material-icons"}>{item.icon}</span> {item.name}</a>
                                     </Link>
