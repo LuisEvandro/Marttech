@@ -13,6 +13,8 @@ O projeto pode ser acessado em [Marttech store](https://marttech-j91s9q0rd-luise
 Executando o servidor de desenvolvimento :
 
 ```bash
+yarn install
+#
 yarn dev
 ```
 
